@@ -21,15 +21,17 @@ export default class Challenge extends React.Component {
   }
 
   handleDelete() {
+    let that = this
     console.log('handleDelete initiated')
     const id = this.props.match.params.id
-    fetch(`http://localhost:2222/challenge/${id}`, {
+    fetch(`http://localhost:2222/challenge/one/${id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      //TO DO: delete feedback. Redirect. 
+      //TO DO: delete feedback. Redirect.
+      that.props.history.push('/')
     })
   }
 

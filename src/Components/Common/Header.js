@@ -9,6 +9,9 @@ export default class Header extends React.Component {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/login'>Login</Link></li>
       </ul>
+      <Link to='/create'>
+        Create Challenge
+      </Link>
     </header>
   )
 }
