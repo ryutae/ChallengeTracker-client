@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../config'
-import GroupsList from '../Groups/GroupsList'
+import GroupsList from '../../Components/Groups/GroupsList'
 
 export default class Home extends React.Component {
   constructor(props) {
