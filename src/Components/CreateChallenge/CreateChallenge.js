@@ -1,10 +1,13 @@
 import React from 'react'
+import './CreateChallenge.css'
+import config from '../../config'
 
+//admin user only
 export default class CreateChallenge extends React.Component {
   handleCreateChallenge(e) {
     e.preventDefault()
     const that = this
-    fetch(`http://localhost:2222/challenge/create`, {
+    fetch(`${config.API_ENDPOINT}/challenge/create`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

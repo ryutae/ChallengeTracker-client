@@ -1,39 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../../config'
+import GroupsList from '../Groups/GroupsList'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      challenges: [],
+      groups: [],
     }
   }
-  componentDidMount() {
-    fetch('http://localhost:2222/challenge/all')
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson)
-      this.setState({
-        challenges: resJson.data
-      })
-    })
-  }
+
   render() {
+    // TODO: Edit Profile info
+    // TODO: Admin menu
   return (
-      <div>
-        <h1>Home Component</h1>
-        {this.state.challenges.map(challenge => {
-          return (
-            <div key={challenge.id}>
-              <Link to={`/challenge/${challenge.id}`}>
-                {challenge.name}
-              </Link> - {challenge.description}
-              Points: {challenge.points}
-            </div>
-            )
-          })
-        }
-      </div>
+    <div>
+      <Link to='/create-group'>
+        Create Group
+      </Link>
+      <GroupsList />
+    </div>
     );
   }
 }

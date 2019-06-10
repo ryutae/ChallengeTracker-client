@@ -1,4 +1,5 @@
 import React from 'react'
+import config from '../../config'
 
 export default class Challenge extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class Challenge extends React.Component {
 
   componentDidMount() {
     const id = this.props.match.params.id
-    fetch(`http://localhost:2222/challenge/one/${id}`)
+    fetch(`${config.API_ENDPOINT}/challenge/one/${id}`)
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
@@ -21,16 +22,16 @@ export default class Challenge extends React.Component {
   }
 
   handleDelete() {
+    //if not admin user, function will not work
     let that = this
     console.log('handleDelete initiated')
     const id = this.props.match.params.id
-    fetch(`http://localhost:2222/challenge/one/${id}`, {
+    fetch(`${config.API_ENDPOINT}/challenge/one/${id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      //TO DO: delete feedback. Redirect.
       that.props.history.push('/')
     })
   }
@@ -40,6 +41,7 @@ export default class Challenge extends React.Component {
 
     return (
       <div>
+        <input type='checkbox' />
         Name: {this.state.challenge.name}
         DESCRIPTION: {this.state.challenge.description}
         Points: {this.state.challenge.points}

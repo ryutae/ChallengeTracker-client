@@ -1,0 +1,20 @@
+header {
+  background-color: grey;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+header li {
+  margin: 0 5px;
+}
