@@ -10,8 +10,8 @@ export default class Challenge extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id
-    fetch(`${config.API_ENDPOINT}/challenge/${id}`)
+    const { challenge_id } = this.props.match.params
+    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`)
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
@@ -23,30 +23,33 @@ export default class Challenge extends React.Component {
 
   handleDelete() {
     //if not admin user, function will not work
+    // TODO: fix the that = this
     let that = this
     console.log('handleDelete initiated')
-    const id = this.props.match.params.id
-    fetch(`${config.API_ENDPOINT}/challenge/${id}`, {
+    const { challenge_id } = this.props.match.params
+    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      that.props.history.push('/')
+      that.props.history.goBack()
     })
   }
 
 
   render() {
-
     return (
       <div>
-        <input type='checkbox' />
-        Name: {this.state.challenge.name}
-        DESCRIPTION: {this.state.challenge.description}
-        Points: {this.state.challenge.points}
+        <input type='checkbox' />Complete
+        <h4>Name: {this.state.challenge.name}</h4>
+        <p>DESCRIPTION: {this.state.challenge.description}</p>
+        <p>Points: {this.state.challenge.points}</p>
         <button onClick={e => this.handleDelete()}>
           Delete
+        </button>
+        <button onClick={() => this.props.history.goBack()}>
+          Back
         </button>
       </div>
     )
