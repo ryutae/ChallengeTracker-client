@@ -9,10 +9,16 @@ export default class ChallengesList extends React.Component {
 
   render() {
     // TODO: return only challenges from group
-  return (
+    const { group_id } = this.props
+    return (
       <div>
         <h1>Challenge List</h1>
-        <Link to='/create-challenge'>
+        <Link to={{
+          pathname: '/create-challenge',
+          state: {
+            group_id: group_id
+          }
+        }}>
           Create Challenge
         </Link>
         {this.props.challenges.map(challenge => {

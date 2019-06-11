@@ -29,13 +29,17 @@ export default class GroupPage extends React.Component {
     // TODO: Leaderboard
     // TODO: Your Team
     // TODO: Challenges
+    // TODO: Edit Group - admin
     return (
       <div className='GroupPage'>
         <h1>Group Page</h1>
         <Link to='/team'>
           Team - to do
         </Link>
-        <ChallengesList challenges={this.state.challenges}/>
+        <ChallengesList
+          group_id={group_id}
+          challenges={this.state.challenges}
+        />
       </div>
       );
   }

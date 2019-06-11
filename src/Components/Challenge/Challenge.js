@@ -11,7 +11,7 @@ export default class Challenge extends React.Component {
 
   componentDidMount() {
     const id = this.props.match.params.id
-    fetch(`${config.API_ENDPOINT}/challenge/one/${id}`)
+    fetch(`${config.API_ENDPOINT}/challenge/${id}`)
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
@@ -26,7 +26,7 @@ export default class Challenge extends React.Component {
     let that = this
     console.log('handleDelete initiated')
     const id = this.props.match.params.id
-    fetch(`${config.API_ENDPOINT}/challenge/one/${id}`, {
+    fetch(`${config.API_ENDPOINT}/challenge/${id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())
