@@ -4,7 +4,7 @@ import config from '../../config'
 
 //admin user only
 export default class CreateGroup extends React.Component {
-  handlehandleCreateGroup(e) {
+  handleCreateGroup(e) {
     e.preventDefault()
     const that = this
     fetch(`${config.API_ENDPOINT}/groups/create`, {
@@ -20,7 +20,7 @@ export default class CreateGroup extends React.Component {
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      that.props.history.push('/')
+      that.props.history.goBack()
     })
     console.log('creating group')
 
@@ -32,7 +32,7 @@ export default class CreateGroup extends React.Component {
         <input name='group_name' id='group_name'/>
         <label htmlFor='group_description'>Description</label>
         <input description='group_description' id='group_description'/>
-        <button>Create Group</button>
+        <button type='submit'>Create Group</button>
       </form>
     )
   }
