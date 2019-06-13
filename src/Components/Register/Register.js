@@ -10,7 +10,6 @@ export default class Register extends React.Component {
     const { register_full_name, register_user_name, register_email, register_password } = ev.target
 
     this.setState({ error: null })
-    debugger
     fetch(`${config.API_ENDPOINT}/auth/register`, {
       method: 'POST',
       headers: {
@@ -40,10 +39,14 @@ export default class Register extends React.Component {
   }
 
   render() {
-  return (
+    const { error } = this.state
+    return (
       <div>
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
+          <div role='alert'>
+            {error && <p className='red'>{error}</p>}
+          </div>
           <div className='fullname'>
             <label htmlFor='register-fullname'>
               Full Name

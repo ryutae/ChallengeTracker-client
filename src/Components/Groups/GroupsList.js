@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../config'
+import TokenService from '../../services/TokenService'
 
 export default class GroupsList extends React.Component {
   constructor(props) {
@@ -10,7 +11,11 @@ export default class GroupsList extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/groups/all`)
+    fetch(`${config.API_ENDPOINT}/groups/all`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+    })
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)

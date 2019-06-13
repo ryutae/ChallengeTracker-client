@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import config from '../../config'
 
 export default class ChallengesList extends React.Component {
   static defaultProps = {

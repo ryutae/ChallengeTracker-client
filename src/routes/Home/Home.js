@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import config from '../../config'
 import GroupsList from '../../Components/Groups/GroupsList'
 
 export default class Home extends React.Component {
@@ -14,13 +13,13 @@ export default class Home extends React.Component {
   render() {
     // TODO: Edit Profile info
     // TODO: Admin menu
-  return (
-    <div>
-      <Link to='/create-group'>
-        Create Group
-      </Link>
-      <GroupsList />
-    </div>
-    );
+    return (
+      <div>
+        <Link to='/create-group'>
+          Create Group
+        </Link>
+        <GroupsList />
+      </div>
+      );
   }
 }

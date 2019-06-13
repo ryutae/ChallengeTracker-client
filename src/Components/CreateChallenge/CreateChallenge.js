@@ -1,7 +1,7 @@
 import React from 'react'
 import './CreateChallenge.css'
 import config from '../../config'
-
+import TokenService from '../../services/TokenService'
 //admin user only
 export default class CreateChallenge extends React.Component {
   handleCreateChallenge(e, group_id) {
@@ -12,6 +12,7 @@ export default class CreateChallenge extends React.Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         group_id: group_id,
