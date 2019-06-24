@@ -37,11 +37,15 @@ export default class Challenge extends React.Component {
     })
   }
 
+  handleCompleteChallenge = () => {
+    console.log(`completed the challenge`)
+  }
+
 
   render() {
     return (
       <div>
-        <input type='checkbox' />Complete
+        <input type='checkbox' onClick={this.handleCompleteChallenge}/>Complete
         <h4>Name: {this.state.challenge.name}</h4>
         <p>DESCRIPTION: {this.state.challenge.description}</p>
         <p>Points: {this.state.challenge.points}</p>

@@ -32,7 +32,6 @@ export default class CreateChallenge extends React.Component {
   }
   render() {
     const { group_id } = this.props.location.state
-    debugger
     // TODO: pass group_id to creating the challenge to save in backend
     return (
       <form onSubmit={e => this.handleCreateChallenge(e, group_id)}>

@@ -8,7 +8,6 @@ export default class Login extends React.Component {
 
   handleLogin = e => {
     e.preventDefault()
-    debugger
     this.setState({ error: null })
     const { login_user_name, login_password } = e.target
     fetch(`${config.API_ENDPOINT}/auth/login`, {
@@ -33,7 +32,6 @@ export default class Login extends React.Component {
       .then(res => {
         login_user_name.value = ''
         login_password.value = ''
-        debugger
         this.props.history.push('/home')
       })
       .catch(res => {
