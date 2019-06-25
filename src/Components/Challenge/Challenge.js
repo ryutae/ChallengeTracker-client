@@ -1,5 +1,6 @@
 import React from 'react'
 import config from '../../config'
+import TokenService from '../../services/TokenService'
 
 export default class Challenge extends React.Component {
   constructor(props) {
@@ -38,14 +39,37 @@ export default class Challenge extends React.Component {
   }
 
   handleCompleteChallenge = () => {
+    // TODO: COMPLETE CHALLENGE BUTTON
     console.log(`completed the challenge`)
+    const { challenge_id } = this.props.match.params
+    fetch(`${config.API_ENDPOINT}/challenge/complete/${challenge_id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        points: this.state.challenge.points,
+        group_id: this.state.challenge.group_id
+      })
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      console.log(resJson)
+    })
+    .catch()
   }
 
 
   render() {
     return (
       <div>
-        <input type='checkbox' onClick={this.handleCompleteChallenge}/>Complete
+        <button
+          className='complete-challenge'
+          onClick={this.handleCompleteChallenge}
+        >
+          Complete
+        </button>
         <h4>Name: {this.state.challenge.name}</h4>
         <p>DESCRIPTION: {this.state.challenge.description}</p>
         <p>Points: {this.state.challenge.points}</p>
