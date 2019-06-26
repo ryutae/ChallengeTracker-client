@@ -18,7 +18,6 @@ export default class GroupsList extends React.Component {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       this.setState({
         groups: resJson.data
       })

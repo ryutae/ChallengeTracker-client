@@ -49,7 +49,6 @@ export default class GroupPage extends React.Component {
     fetch(`${config.API_ENDPOINT}/challenge/group/${group_id}`)
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       this.setState({
         challenges: resJson.data
       })
@@ -71,7 +70,7 @@ export default class GroupPage extends React.Component {
         <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>
-        
+
         <button onClick={this.handleJoinGroup}>
           Join Group
         </button>

@@ -15,7 +15,6 @@ export default class Challenge extends React.Component {
     fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`)
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       this.setState({
         challenge: resJson.data
       })
@@ -38,6 +37,21 @@ export default class Challenge extends React.Component {
     })
   }
 
+    updatePoints = () => {
+      console.log('updatePoints started')
+      debugger
+    fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        group_id: this.state.challenge.group_id
+      })
+    })
+  }
+
   handleCompleteChallenge = () => {
     // TODO: COMPLETE CHALLENGE BUTTON
     console.log(`completed the challenge`)
@@ -57,6 +71,7 @@ export default class Challenge extends React.Component {
     .then(resJson => {
       console.log(resJson)
     })
+    .then(this.updatePoints)
     .catch()
   }
 
