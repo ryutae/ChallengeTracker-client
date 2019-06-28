@@ -10,6 +10,7 @@ import Home from './routes/Home/Home'
 import Team from './routes/Team/TeamPage'
 import GroupPage from './routes/GroupPage'
 import NotFoundPage from './routes/NotFoundPage/NotFoundPage'
+import Leaderboard from './routes/Leaderboard/LeaderboardPage'
 
 export default class Routes extends React.Component {
   render() {
@@ -18,13 +19,14 @@ export default class Routes extends React.Component {
         <Switch>
           <Route exact path='/' component={LandingPage}/>
           <Route path='/home' component={Home}/>
-          <Route path='/groups/:group_id' component={GroupPage}/>
+          <Route exact path='/groups/:group_id' component={GroupPage}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
           <Route path='/challenge/:challenge_id' component={Challenge}/>
           <Route path='/create-challenge' component={CreateChallenge}/>
           <Route path='/create-group' component={CreateGroup}/>
           <Route path='/team' component={Team}/>
+          <Route path='/groups/:group_id/leaderboard'  component={Leaderboard}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>

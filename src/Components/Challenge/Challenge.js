@@ -37,9 +37,8 @@ export default class Challenge extends React.Component {
     })
   }
 
-    updatePoints = () => {
-      console.log('updatePoints started')
-      debugger
+  updatePoints = () => {
+    console.log('updatePoints started')
     fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
       method: 'PATCH',
       headers: {

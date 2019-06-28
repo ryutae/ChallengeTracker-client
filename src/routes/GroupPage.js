@@ -11,18 +11,28 @@ export default class GroupPage extends React.Component {
     this.state = {
       challenges: [],
       error: null,
+      joinGroupMessage: null
     }
   }
 
   renderJoinedGroup() {
+    console.log('renderJoinedGroup')
     return (
       <h3>Joined Group!</h3>
     )
+    this.forceUpdate()
+
   }
 
+
+
   handleJoinGroup = e => {
+    debugger
     e.preventDefault()
-    this.setState({ error: null })
+    this.setState({
+      error: null,
+      groupJoined: true
+     })
     const { group_id } = this.props.match.params
     fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
       method: 'POST',
@@ -37,7 +47,11 @@ export default class GroupPage extends React.Component {
             : res.json()
     )
     .then(res =>
-      this.renderJoinedGroup()
+      this.setState({
+        joinGroupMessage: 'Joined group!'
+      })
+      // this.renderJoinedGroup()
+
     )
     .catch(res => {
       this.setState({ error: res.error })
@@ -70,13 +84,18 @@ export default class GroupPage extends React.Component {
         <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>
-
-        <button onClick={this.handleJoinGroup}>
-          Join Group
-        </button>
-        <Link to='/team'>
-          Team - to do
-        </Link>
+        <ul>
+          <li>
+            <Link to='/team'>
+              Team - to do
+            </Link>
+          </li>
+          <li>
+            <Link to={`${group_id}/leaderboard`}>
+              Leaderboard
+            </Link>
+          </li>
+        </ul>
         <ChallengesList
           group_id={group_id}
           challenges={this.state.challenges}

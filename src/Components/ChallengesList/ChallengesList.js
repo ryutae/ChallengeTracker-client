@@ -13,6 +13,39 @@ export default class ChallengesList extends React.Component {
     error: ''
   }
 
+  handleJoinGroup = () => {
+    // e.preventDefault()
+    this.setState({ error: null })
+
+    const { group_id } = this.props
+    fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res =>
+      (!res.ok)
+            ? res.json().then(e => Promise.reject(e))
+            : res.json()
+    )
+    .then(res =>
+      this.renderJoinedGroup()
+    )
+    .catch(res => {
+      this.setState({ error: res.error })
+    })
+  }
+
+  renderJoinGroupButton() {
+    return (
+      <button onClick={this.handleJoinGroup}>
+        Join Group
+      </button>
+    )
+  }
+
   componentDidMount() {
     const { group_id } = this.props
     this.setState({ error: ''})
@@ -32,6 +65,12 @@ export default class ChallengesList extends React.Component {
     })
   }
 
+  renderUserPoints() {
+    return (
+      <p>Current Points: {this.state.user.points}</p>
+    )
+  }
+
   render() {
     // TODO: complete challenge - checkbox interaction with state and API
     const { group_id } = this.props
@@ -46,7 +85,7 @@ export default class ChallengesList extends React.Component {
         }}>
           Create Challenge
         </Link>
-        <p>Current Points: {this.state.user.points}</p>
+        {(this.state.user) ? this.renderUserPoints() : this.renderJoinGroupButton()}
         {this.props.challenges.map(challenge => {
           return (
             <div key={challenge.id}>
