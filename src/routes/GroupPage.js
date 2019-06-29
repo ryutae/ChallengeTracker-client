@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import config from '../config'
 import ChallengesList from '../Components/ChallengesList/ChallengesList'
 import TokenService from '../services/TokenService'
-
+import GroupListContext from '../contexts/GroupListContext'
 
 export default class GroupPage extends React.Component {
+  static contextType = GroupListContext
+
   constructor(props) {
     super(props)
     this.state = {

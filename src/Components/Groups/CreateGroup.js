@@ -1,16 +1,17 @@
 import React from 'react'
 import './CreateGroup.css'
 import config from '../../config'
+import TokenService from '../../services/TokenService'
 
 //admin user only
 export default class CreateGroup extends React.Component {
-  handleCreateGroup(e) {
+  handleCreateGroup = e => {
     e.preventDefault()
-    const that = this
-    fetch(`${config.API_ENDPOINT}/groups/create`, {
+    fetch(`${config.API_ENDPOINT}/groups/create/new`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         name: e.target.group_name.value,
@@ -20,14 +21,14 @@ export default class CreateGroup extends React.Component {
     .then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      that.props.history.goBack()
+      this.props.history.goBack()
     })
     console.log('creating group')
 
   }
   render() {
     return (
-      <form onSubmit={e => this.handleCreateGroup(e)}>
+      <form onSubmit={this.handleCreateGroup}>
         <label htmlFor='group_name'>Name</label>
         <input name='group_name' id='group_name'/>
         <label htmlFor='group_description'>Description</label>

@@ -8,7 +8,6 @@ export default class GroupsList extends React.Component {
   static contextType = GroupListContext
 
   componentDidMount() {
-    debugger
     this.context.clearError()
     fetch(`${config.API_ENDPOINT}/groups/all`, {
       headers: {
@@ -38,7 +37,6 @@ export default class GroupsList extends React.Component {
 
 
   render() {
-    debugger
     const { error } = this.context
     return (
       <section className='GroupList'>
