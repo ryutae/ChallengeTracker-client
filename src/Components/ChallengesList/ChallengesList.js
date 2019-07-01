@@ -2,8 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
+import GroupListContext from '../../contexts/GroupListContext'
 
 export default class ChallengesList extends React.Component {
+  static contextType = GroupListContext
+
   static defaultProps = {
     challenges: [],
   }
@@ -57,7 +60,7 @@ export default class ChallengesList extends React.Component {
     .then(res => res.json())
     .then(resJson =>
       this.setState({
-        user: resJson.data
+        user: resJson
       })
     )
     .catch(res => {
@@ -71,20 +74,35 @@ export default class ChallengesList extends React.Component {
     )
   }
 
-  render() {
-    // TODO: complete challenge - checkbox interaction with state and API
+  renderCreateChallenge() {
     const { group_id } = this.props
+    return (
+      <Link to={{
+        pathname: '/create-challenge',
+        state: {
+          group_id: group_id
+        }
+      }}>
+        Create Challenge
+      </Link>
+    )
+  }
+
+  // checkUserIsGroupOwner(group_id) {
+  //   this.state.user.user_id == this.context.groupList[group_id - 1].created_by
+  // }
+
+  render() {
+    
+    // TODO: complete challenge - checkbox interaction with state and API
+    const group_id = parseInt(this.props.group_id)
+    const { user_id } = this.state.user
+    const { created_by } = this.context.groupList[(group_id - 1)]
     return (
       <div>
         <h1>Challenge List</h1>
-        <Link to={{
-          pathname: '/create-challenge',
-          state: {
-            group_id: group_id
-          }
-        }}>
-          Create Challenge
-        </Link>
+        {user_id && created_by && (this.state.user.user_id == this.context.groupList[group_id - 1].created_by) && this.renderCreateChallenge()}
+
         {(this.state.user) ? this.renderUserPoints() : this.renderJoinGroupButton()}
         {this.props.challenges.map(challenge => {
           return (
