@@ -18,9 +18,10 @@ export default class ChallengesList extends React.Component {
 
   handleJoinGroup = () => {
     // e.preventDefault()
+    debugger
     this.setState({ error: null })
 
-    const { group_id } = this.props
+    const group_id = this.context.group.id
     fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
       method: 'POST',
       headers: {
@@ -43,7 +44,9 @@ export default class ChallengesList extends React.Component {
 
   renderJoinGroupButton() {
     return (
-      <button onClick={this.handleJoinGroup}>
+      <button
+        className='JoinButton'
+        onClick={this.handleJoinGroup}>
         Join Group
       </button>
     )
@@ -75,7 +78,7 @@ export default class ChallengesList extends React.Component {
   }
 
   renderCreateChallenge() {
-    const { group_id } = this.context.group.id
+    const group_id = this.context.group.id
     return (
       <Link to={{
         pathname: '/create-challenge',
@@ -88,9 +91,9 @@ export default class ChallengesList extends React.Component {
     )
   }
 
-  // checkUserIsGroupOwner(group_id) {
-  //   this.state.user.user_id == this.context.groupList[group_id - 1].created_by
-  // }
+  checkUserIsGroupOwner() {
+    return (this.context.user.user_id === this.context.group.created_by)
+  }
 
   render() {
     // TODO: complete challenge - checkbox interaction with state and API
@@ -98,12 +101,17 @@ export default class ChallengesList extends React.Component {
     const { user } = this.context
     const { challengesInGroup } = this.context
     const { group } = this.context
-    // const { created_by } = this.context.groupList[(group_id - 1)]
+    // let userIsGroupOwner
+    // if (user.user_id === group.created_by) {
+    //   userIsGroupOwner = true
+    // } userIsGroupOwner = false
+
     // TODO:   {user_id && created_by && (this.state.user.user_id == this.context.groupList[group_id - 1].created_by) && this.renderCreateChallenge()}
     return (
       <div>
         <h1>Challenge List</h1>
-        {(user) ? this.renderUserPoints() : this.renderJoinGroupButton()}
+        {(user.userInGroup) ? this.renderUserPoints() : this.renderJoinGroupButton()}
+        {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
         {this.context.challengesInGroup.map(challenge => {
           return (
             <div key={challenge.id}>
