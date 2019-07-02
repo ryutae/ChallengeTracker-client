@@ -2,15 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
-import GroupListContext from '../../contexts/GroupListContext'
+import GroupPageContext from '../../contexts/GroupPageContext'
 
 export default class ChallengesList extends React.Component {
-  static contextType = GroupListContext
+  static contextType = GroupPageContext
 
-  static defaultProps = {
-    challenges: [],
-  }
-
+  // static defaultProps = {
+  //   challenges: [],
+  // }
+  //
   state = {
     user: [],
     error: ''
@@ -49,33 +49,33 @@ export default class ChallengesList extends React.Component {
     )
   }
 
-  componentDidMount() {
-    const { group_id } = this.props
-    this.setState({ error: ''})
-    fetch(`${config.API_ENDPOINT}/user/group/${group_id}`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      }
-    })
-    .then(res => res.json())
-    .then(resJson =>
-      this.setState({
-        user: resJson
-      })
-    )
-    .catch(res => {
-      this.setState({ error: res.error })
-    })
-  }
+  // componentDidMount() {
+  //   const { group_id } = this.props
+  //   this.setState({ error: ''})
+  //   fetch(`${config.API_ENDPOINT}/user/group/${group_id}`, {
+  //     headers: {
+  //       'authorization': `bearer ${TokenService.getAuthToken()}`,
+  //     }
+  //   })
+  //   .then(res => res.json())
+  //   .then(resJson =>
+  //     this.setState({
+  //       user: resJson
+  //     })
+  //   )
+  //   .catch(res => {
+  //     this.setState({ error: res.error })
+  //   })
+  // }
 
   renderUserPoints() {
     return (
-      <p>Current Points: {this.state.user.points}</p>
+      <p>Current Points: {this.context.user.points}</p>
     )
   }
 
   renderCreateChallenge() {
-    const { group_id } = this.props
+    const { group_id } = this.context.group.id
     return (
       <Link to={{
         pathname: '/create-challenge',
@@ -93,18 +93,18 @@ export default class ChallengesList extends React.Component {
   // }
 
   render() {
-    
     // TODO: complete challenge - checkbox interaction with state and API
-    const group_id = parseInt(this.props.group_id)
-    const { user_id } = this.state.user
-    const { created_by } = this.context.groupList[(group_id - 1)]
+    const group_id = parseInt(this.context.group.id)
+    const { user } = this.context
+    const { challengesInGroup } = this.context
+    const { group } = this.context
+    // const { created_by } = this.context.groupList[(group_id - 1)]
+    // TODO:   {user_id && created_by && (this.state.user.user_id == this.context.groupList[group_id - 1].created_by) && this.renderCreateChallenge()}
     return (
       <div>
         <h1>Challenge List</h1>
-        {user_id && created_by && (this.state.user.user_id == this.context.groupList[group_id - 1].created_by) && this.renderCreateChallenge()}
-
-        {(this.state.user) ? this.renderUserPoints() : this.renderJoinGroupButton()}
-        {this.props.challenges.map(challenge => {
+        {(user) ? this.renderUserPoints() : this.renderJoinGroupButton()}
+        {this.context.challengesInGroup.map(challenge => {
           return (
             <div key={challenge.id}>
               <input type='checkbox'  />

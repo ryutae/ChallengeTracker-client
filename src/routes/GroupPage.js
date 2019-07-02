@@ -3,28 +3,27 @@ import { Link } from 'react-router-dom'
 import config from '../config'
 import ChallengesList from '../Components/ChallengesList/ChallengesList'
 import TokenService from '../services/TokenService'
-import GroupListContext from '../contexts/GroupListContext'
+import GroupPageContext from '../contexts/GroupPageContext'
 
 export default class GroupPage extends React.Component {
-  static contextType = GroupListContext
-
   constructor(props) {
     super(props)
     this.state = {
-      challenges: [],
+      challengesInGroup: [],
       error: null,
-      joinGroupMessage: null
+      joinGroupMessage: null,
+      group: [],
+      user: []
     }
   }
 
-  renderJoinedGroup() {
-    console.log('renderJoinedGroup')
-    return (
-      <h3>Joined Group!</h3>
-    )
-    this.forceUpdate()
-
-  }
+  // renderJoinedGroup() {
+  //   console.log('renderJoinedGroup')
+  //   return (
+  //     <h3>Joined Group!</h3>
+  //   )
+  //   this.forceUpdate()
+  // }
 
 
 
@@ -61,12 +60,33 @@ export default class GroupPage extends React.Component {
   }
   //put the state in the context
   componentDidMount() {
+    this.setState({
+      challengesInGroup: [],
+      error: null,
+      joinGroupMessage: null,
+      group: [],
+      user: []
+    })
     const { group_id } = this.props.match.params
-    fetch(`${config.API_ENDPOINT}/challenge/group/${group_id}`)
-    .then(res => res.json())
-    .then(resJson => {
+    this.setState({ error: null })
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/challenge/group/${group_id}`),
+      fetch(`${config.API_ENDPOINT}/groups/${group_id}`),
+      fetch(`${config.API_ENDPOINT}/user/group/${group_id}`, {
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+      })
+    ])
+    .then(([res1, res2, res3]) => {
+      return Promise.all([res1.json(), res2.json(), res3.json()])
+    })
+    .then(([res1Json, res2Json, res3Json]) => {
+      console.log(res1Json, res2Json, res3Json)
       this.setState({
-        challenges: resJson.data
+        challengesInGroup: res1Json,
+        group: res2Json,
+        user: res3Json
       })
     })
     .catch(this.setState({ error: true }))
@@ -74,34 +94,38 @@ export default class GroupPage extends React.Component {
 
   render() {
     const { group_id } = this.props.match.params
-    const { error } = this.state
     // TODO: Leaderboard
     // TODO: Your Team
     // TODO: Challenges
     // TODO: Edit Group - admin
     // TODO: Join Group
+    const contextValue = {
+      group: this.state.group,
+      challengesInGroup: this.state.challengesInGroup,
+      user: this.state.user,
+      error: this.state.error
+    }
     return (
       <div className='GroupPage'>
-        <h1>Group Page</h1>
-        <div role='alert'>
-          {error && <p className='red'>{error}</p>}
-        </div>
-        <ul>
-          <li>
-            <Link to='/team'>
-              Team - to do
-            </Link>
-          </li>
-          <li>
-            <Link to={`${group_id}/leaderboard`}>
-              Leaderboard
-            </Link>
-          </li>
-        </ul>
-        <ChallengesList
-          group_id={group_id}
-          challenges={this.state.challenges}
-        />
+        <GroupPageContext.Provider value={contextValue}>
+          <h1>Group Page</h1>
+          <div role='alert'>
+            {this.state.error && <p className='red'>{this.state.error}</p>}
+          </div>
+          <ul>
+            <li>
+              <Link to='/team'>
+                Team - to do
+              </Link>
+            </li>
+            <li>
+              <Link to={`${group_id}/leaderboard`}>
+                Leaderboard
+              </Link>
+            </li>
+          </ul>
+          <ChallengesList/>
+        </GroupPageContext.Provider>
       </div>
       );
   }
