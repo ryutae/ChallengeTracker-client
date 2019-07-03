@@ -8,6 +8,7 @@ const GroupPageContext = React.createContext({
   error: null,
   setError: () => {},
   clearError: () => {},
+  updatePoints: () => {}
 })
 
 export default GroupPageContext

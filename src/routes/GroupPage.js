@@ -94,6 +94,26 @@ export default class GroupPage extends React.Component {
     .catch(this.setState({ error: true }))
   }
 
+  updatePoints = () => {
+    console.log('updatePoints started')
+    fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        group_id: this.state.challenge.group_id
+      })
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      this.setState({
+        user:{points: resJson.points}
+      })
+    })
+  }
+
   render() {
     const { group_id } = this.props.match.params
     // TODO: Leaderboard
