@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
 import GroupPageContext from '../../contexts/GroupPageContext'
+import ChallengeListItem from '../ChallengeListItem/ChallengeListItem'
 
 export default class ChallengesList extends React.Component {
   static contextType = GroupPageContext
@@ -113,15 +114,11 @@ export default class ChallengesList extends React.Component {
         {(user.userInGroup) ? this.renderUserPoints() : this.renderJoinGroupButton()}
         {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
         {this.context.challengesInGroup.map(challenge => {
-          return (
-            <div key={challenge.id}>
-              <input type='checkbox'  />
-              <Link to={`/challenge/${challenge.id}`}>
-                {challenge.name}
-              </Link> - {challenge.description}
-              Points: {challenge.points}
-            </div>
-            )
+            return (<ChallengeListItem
+              key={challenge.id}
+              challenge={challenge}
+            />
+          )
           })
         }
       </div>

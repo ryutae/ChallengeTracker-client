@@ -1,0 +1,14 @@
+.ChallengeListItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.ChallengeListItem_detail {
+  width: 75%;
+  flex-direction: row;
+  flex-grow: 3
+}
+
+.ChallengeListItem_points {
+  flex-grow: 1
+}

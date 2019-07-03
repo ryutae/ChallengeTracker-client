@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../config'
 import ChallengesList from '../Components/ChallengesList/ChallengesList'
+import CompletedChallengesList from '../Components/ChallengesList/CompletedChallengesList'
+import UncompletedChallengesList from '../Components/ChallengesList/UncompletedChallengesList'
 import TokenService from '../services/TokenService'
 import GroupPageContext from '../contexts/GroupPageContext'
 
@@ -108,7 +110,7 @@ export default class GroupPage extends React.Component {
     return (
       <div className='GroupPage'>
         <GroupPageContext.Provider value={contextValue}>
-          <h1>Group Page</h1>
+          <h1>{this.state.group.name}</h1>
           <div role='alert'>
             {this.state.error && <p className='red'>{this.state.error}</p>}
           </div>
@@ -125,6 +127,8 @@ export default class GroupPage extends React.Component {
             </li>
           </ul>
           <ChallengesList/>
+          {this.state.user.userInGroup && <CompletedChallengesList/>}
+          {this.state.user.userInGroup  && <UncompletedChallengesList/>}
         </GroupPageContext.Provider>
       </div>
       );
