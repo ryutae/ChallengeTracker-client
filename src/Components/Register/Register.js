@@ -1,6 +1,6 @@
 import React from 'react'
 import config from '../../config'
-import loginImg from '../../assets/login.png'
+import loginImg from '../../Assets/login.png'
 import './Register.css'
 
 export default class Register extends React.Component {

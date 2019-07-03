@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
-import loginImg from '../../assets/login.png'
+import loginImg from '../../Assets/login.png'
 
 export default class Login extends React.Component {
   state = { error: null}
