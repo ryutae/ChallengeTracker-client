@@ -1,28 +1,40 @@
 import React from 'react'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
-
+import GroupPageContext from '../../contexts/GroupPageContext'
 export default class Challenge extends React.Component {
+  static contextType = GroupPageContext
   constructor(props) {
     super(props)
     this.state = {
       challenge: {},
+      challengeComplete: null
     }
   }
 
   componentDidMount() {
     const { challenge_id } = this.props.match.params
-    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`)
-    .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson)
+    Promise.all([
+    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`),
+    fetch(`${config.API_ENDPOINT}/challenge/complete/${challenge_id}`, {
+      method: 'GET',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+    })
+    ])
+    .then(([res1, res2]) => {
+      return Promise.all([res1.json(), res2.json()])
+    })
+    .then(([res1Json, res2Json]) => {
       this.setState({
-        challenge: resJson.data
+        challenge: res1Json.data,
+        challengeComplete: res2Json.challengeComplete
       })
     })
   }
 
-  handleDelete() {
+  handleDelete = () => {
     //if not admin user, function will not work
     // TODO: fix the that = this
     let that = this
@@ -35,6 +47,20 @@ export default class Challenge extends React.Component {
     .then(resJson => {
       console.log(resJson)
       that.props.history.goBack()
+    })
+  }
+
+  updatePoints = () => {
+    console.log('updatePoints started')
+    fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        group_id: this.state.challenge.group_id
+      })
     })
   }
 
@@ -57,28 +83,53 @@ export default class Challenge extends React.Component {
     .then(resJson => {
       console.log(resJson)
     })
+    .then(this.updatePoints)
+    .then(this.props.history.goBack())
     .catch()
   }
 
+  renderDeleteButton() {
+      return (
+        <button onClick={this.handleDelete}>
+          Delete
+        </button>
+      )
+  }
+
+  checkUserIsGroupOwner() {
+    return ((this.context.user.user_id === this.context.group.created_by) && (!!this.context.user.user_id))
+  }
+
+  checkUserInGroup() {
+    return (!!this.context.user.points)
+  }
+
+  renderCompleteChallengeButton() {
+    return (
+      <button
+        className='complete-challenge-button'
+        onClick={this.handleCompleteChallenge}
+      >
+        Complete
+      </button>
+    )
+  }
+
+  checkIfChallengeComplete() {
+    return this.state.challengeComplete
+  }
 
   render() {
     return (
       <div>
-        <button
-          className='complete-challenge'
-          onClick={this.handleCompleteChallenge}
-        >
-          Complete
-        </button>
-        <h4>Name: {this.state.challenge.name}</h4>
-        <p>DESCRIPTION: {this.state.challenge.description}</p>
-        <p>Points: {this.state.challenge.points}</p>
-        <button onClick={e => this.handleDelete()}>
-          Delete
-        </button>
+        <h4>Challenge: {this.state.challenge.name}</h4>
+        <p>{this.state.challenge.description}</p>
+        <p>{this.state.challenge.points} Points</p>
+        {!this.checkIfChallengeComplete() && this.renderCompleteChallengeButton()}
         <button onClick={() => this.props.history.goBack()}>
           Back
         </button>
+        {this.checkUserIsGroupOwner() && this.renderDeleteButton()}
       </div>
     )
   }

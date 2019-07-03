@@ -6,6 +6,9 @@ export default class TeamPage extends React.Component {
     return (
       <div>
         Team Page
+        <button onClick={() => this.props.history.goBack()}>
+          Back
+        </button>
       </div>
       );
   }
