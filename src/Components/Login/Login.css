@@ -1,3 +1,13 @@
-.login-form {
-  background-color: grey,
+.login-page {
+  max-width: 800px;
+  margin: auto;
+}
+
+.login_form {
+  padding-top: 1rem;
+}
+
+img {
+  width: 45%;
+  margin-top: 1.5rem;
 }

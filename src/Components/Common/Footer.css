@@ -1,4 +1,8 @@
 footer {
-  background-color: grey;
-  color: white,
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--font-color) !important;
+  color: var(--light-color);
 }

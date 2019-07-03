@@ -2,8 +2,9 @@ import React from 'react'
 import './Login.css'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
-export default class Login extends React.Component {
+import loginImg from '../../assets/login.png'
 
+export default class Login extends React.Component {
   state = { error: null}
 
   handleLogin = e => {
@@ -42,22 +43,17 @@ export default class Login extends React.Component {
   render() {
     const { error } = this.state
     return (
-      <div>
-        <h1>Login</h1>
+      <div className="login-page">
+        <h1 className="title">Login</h1>
+          <img src={loginImg} alt=""/>
         <form className='login_form' onSubmit={this.handleLogin}>
           <div role='alert'>
             {error && <p className='red'>{error}</p>}
           </div>
           <div className='user_name'>
-            <label htmlFor='login_user_name'>
-            User name
-            </label>
             <input name='login_user_name' id='login_user_name' placeholder='User name' />
           </div>
           <div className='password'>
-            <label htmlFor='login_password'>
-              Password
-            </label>
             <input name='login_password' type='password' id='login_password' placeholder='Password' />
           </div>
           <button type='submit'>

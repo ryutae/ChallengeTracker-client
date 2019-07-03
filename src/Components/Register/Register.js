@@ -1,13 +1,41 @@
 import React from 'react'
 import config from '../../config'
+import loginImg from '../../assets/login.png'
+import './Register.css'
 
 export default class Register extends React.Component {
 
-  state = { error: null }
+  state = {
+      error: null,
+      errorUsername: null
+  }
+
+  validate = (username) => {
+    let result = true
+
+    if(username.length < 3) {
+        this.setState({errorUsername: "Username is too short"})
+        result = false
+    }
+
+    if(!username) {
+        this.setState({errorUsername: "Username is required"})
+        result = false
+    }
+
+    return result
+  }
+
+  refreshError = () => {
+      this.setState({errorUsername: null})
+  }
 
   handleSubmit = ev => {
     ev.preventDefault()
     const { register_full_name, register_user_name, register_email, register_password } = ev.target
+    if(!this.validate(register_user_name.value)) {
+        return
+    }
 
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/auth/register`, {
@@ -41,35 +69,28 @@ export default class Register extends React.Component {
   render() {
     const { error } = this.state
     return (
-      <div>
-        <h1>Register</h1>
+      <div className="register-page">
+        <h1 className="title">Register</h1>
+        <img src={loginImg} alt=""/>
+
         <form onSubmit={this.handleSubmit}>
           <div role='alert'>
             {error && <p className='red'>{error}</p>}
           </div>
           <div className='fullname'>
-            <label htmlFor='register-fullname'>
-              Full Name
-            </label>
-            <input name='register_full_name' type='text' id='register_fullname' placeholder='Full Name' required/>
+            <input name='register_full_name' type='text' id='register_fullname' placeholder='Full Name'/>
           </div>
           <div className='user_name'>
-          <label htmlFor='RegistrationForm__user_name'>
-            User name
-          </label>
-          <input name='register_user_name' type='text' id='register_user_name' placeholder='User Name' required/>
+          <input name='register_user_name' type='text' id='register_user_name' onFocus={this.refreshError} placeholder='User Name' className={ this.state.errorUsername ? 'input-error' : 'none' }/>
+          {
+              this.state.errorUsername && <p className="form-error">{this.state.errorUsername}</p>
+          }
         </div>
           <div className='email'>
-            <label htmlFor='register_email'>
-            email
-            </label>
-            <input name='register_email' type='text' id='register_email' placeholder='email' required/>
+            <input name='register_email' type='text' id='register_email' placeholder='email'/>
           </div>
           <div className='password'>
-            <label htmlFor='register_password'>
-              Password
-            </label>
-            <input name='register_password' type='password' id='register_password' placeholder='Password' required/>
+            <input name='register_password' type='password' id='register_password' placeholder='Password'/>
           </div>
           <button type='submit'>
             Register
