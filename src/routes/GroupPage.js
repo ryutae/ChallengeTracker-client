@@ -13,7 +13,7 @@ export default class GroupPage extends React.Component {
     this.state = {
       challengesInGroup: [],
       error: null,
-      joinGroupMessage: null,
+      joinedGroup: null,
       group: [],
       user: []
     }
@@ -30,11 +30,10 @@ export default class GroupPage extends React.Component {
 
 
   handleJoinGroup = e => {
-    debugger
+    if (TokenService.hasAuthToken()) {
     e.preventDefault()
     this.setState({
-      error: null,
-      groupJoined: true
+      error: null
      })
     const { group_id } = this.props.match.params
     fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
@@ -51,14 +50,15 @@ export default class GroupPage extends React.Component {
     )
     .then(res =>
       this.setState({
-        joinGroupMessage: 'Joined group!'
+        joinedGroup: true
       })
-      // this.renderJoinedGroup()
 
     )
     .catch(res => {
       this.setState({ error: res.error })
     })
+  }
+  else {this.props.history.push('/login')}
   }
   //put the state in the context
   componentDidMount() {
@@ -114,6 +114,16 @@ export default class GroupPage extends React.Component {
     })
   }
 
+  renderJoinGroupButton() {
+    return (
+      <button
+        className='JoinButton'
+        onClick={this.handleJoinGroup}>
+        Join Group
+      </button>
+    )
+  }
+
   render() {
     const { group_id } = this.props.match.params
     // TODO: Leaderboard
@@ -146,6 +156,7 @@ export default class GroupPage extends React.Component {
               </Link>
             </li>
           </ul>
+          {(!this.state.user.userInGroup) && (!this.state.joinedGroup) && this.renderJoinGroupButton()}
           <ChallengesList/>
           {this.state.user.userInGroup && <CompletedChallengesList/>}
           {this.state.user.userInGroup  && <UncompletedChallengesList/>}

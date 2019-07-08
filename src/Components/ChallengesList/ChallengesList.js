@@ -17,41 +17,42 @@ export default class ChallengesList extends React.Component {
     error: ''
   }
 
-  handleJoinGroup = () => {
-    // e.preventDefault()
-    debugger
-    this.setState({ error: null })
-
-    const group_id = this.context.group.id
-    fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
-      }
-    })
-    .then(res =>
-      (!res.ok)
-            ? res.json().then(e => Promise.reject(e))
-            : res.json()
-    )
-    .then(res =>
-      this.renderJoinedGroup()
-    )
-    .catch(res => {
-      this.setState({ error: res.error })
-    })
-  }
-
-  renderJoinGroupButton() {
-    return (
-      <button
-        className='JoinButton'
-        onClick={this.handleJoinGroup}>
-        Join Group
-      </button>
-    )
-  }
+  // handleJoinGroup = () => {
+  //   // e.preventDefault()
+  //   debugger
+  //   this.setState({ error: null })
+  //
+  //   const group_id = this.context.group.id
+  //   fetch(`${config.API_ENDPOINT}/groups/join/${group_id}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       'authorization': `bearer ${TokenService.getAuthToken()}`
+  //     }
+  //   })
+  //   .then(res =>
+  //     (!res.ok)
+  //           ? res.json().then(e => Promise.reject(e))
+  //           : res.json()
+  //   )
+  //   .then(res =>
+  //     this.renderJoinedGroup()
+  //     //this.context.JoinedGroup()
+  //   )
+  //   .catch(res => {
+  //     this.setState({ error: res.error })
+  //   })
+  // }
+  //
+  // renderJoinGroupButton() {
+  //   return (
+  //     <button
+  //       className='JoinButton'
+  //       onClick={this.handleJoinGroup}>
+  //       Join Group
+  //     </button>
+  //   )
+  // }
 
   // componentDidMount() {
   //   const { group_id } = this.props
@@ -97,23 +98,14 @@ export default class ChallengesList extends React.Component {
   }
 
   render() {
-    // TODO: complete challenge - checkbox interaction with state and API
-    const group_id = parseInt(this.context.group.id)
     const { user } = this.context
     const { challengesInGroup } = this.context
-    const { group } = this.context
-    // let userIsGroupOwner
-    // if (user.user_id === group.created_by) {
-    //   userIsGroupOwner = true
-    // } userIsGroupOwner = false
-
-    // TODO:   {user_id && created_by && (this.state.user.user_id == this.context.groupList[group_id - 1].created_by) && this.renderCreateChallenge()}
     return (
       <div>
         <h1>Challenge List</h1>
-        {(user.userInGroup) ? this.renderUserPoints() : this.renderJoinGroupButton()}
+        {(user.userInGroup) && this.renderUserPoints()}
         {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
-        {this.context.challengesInGroup.map(challenge => {
+        {challengesInGroup.map(challenge => {
             return (<ChallengeListItem
               key={challenge.id}
               challenge={challenge}

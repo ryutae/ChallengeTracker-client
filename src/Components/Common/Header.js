@@ -2,10 +2,17 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.css'
 import TokenService from '../../services/TokenService'
+import UserContext from '../../contexts/UserContext'
 
 export default class Header extends React.Component {
+  static contextType = UserContext
+  // state = {
+  //   userLoggedIn: null
+  // }
+
   handleLogoutClick = () => {
   TokenService.clearAuthToken()
+  this.context.setUserLoggedInFalse()
   /* when logging out, clear the callbacks to the refresh api and idle auto logout */
   // TokenService.clearCallbackBeforeExpiry()
   // IdleService.unRegisterIdleResets()
@@ -31,7 +38,7 @@ export default class Header extends React.Component {
       </>
     )
   }
-  
+
   render() {
     return (
       <header>

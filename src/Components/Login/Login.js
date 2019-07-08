@@ -3,10 +3,13 @@ import './Login.css'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
 import loginImg from '../../Assets/login.png'
+import UserContext from '../../contexts/UserContext'
 
 export default class Login extends React.Component {
-  state = { error: null}
-
+  static contextType = UserContext
+  state = {
+    error: null
+  }
   handleLogin = e => {
     e.preventDefault()
     this.setState({ error: null })
@@ -33,10 +36,11 @@ export default class Login extends React.Component {
       .then(res => {
         login_user_name.value = ''
         login_password.value = ''
+        this.context.setUserLoggedInTrue()
         this.props.history.push('/home')
       })
       .catch(res => {
-        this.setState({ error: res.error })
+        this.context.setError(res.error)
       })
   }
 
