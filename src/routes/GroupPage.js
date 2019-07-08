@@ -124,6 +124,12 @@ export default class GroupPage extends React.Component {
     )
   }
 
+  renderUserPoints() {
+    return (
+      <h3>Current Points: {this.state.user.points}</h3>
+    )
+  }
+
   render() {
     const { group_id } = this.props.match.params
     // TODO: Leaderboard
@@ -157,9 +163,11 @@ export default class GroupPage extends React.Component {
             </li>
           </ul>
           {(!this.state.user.userInGroup) && (!this.state.joinedGroup) && this.renderJoinGroupButton()}
-          <ChallengesList/>
-          {this.state.user.userInGroup && <CompletedChallengesList/>}
+          {this.state.user.userInGroup && this.renderUserPoints()}
+
+          {(!this.state.user.userInGroup) && <ChallengesList/>}
           {this.state.user.userInGroup  && <UncompletedChallengesList/>}
+          {this.state.user.userInGroup && <CompletedChallengesList/>}
         </GroupPageContext.Provider>
       </div>
       );

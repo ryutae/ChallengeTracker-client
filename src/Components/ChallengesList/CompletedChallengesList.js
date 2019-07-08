@@ -31,11 +31,7 @@ export default class CompletedChallengesList extends React.Component {
     })
   }
 
-  renderUserPoints() {
-    return (
-      <p>Current Points: {this.context.user.points}</p>
-    )
-  }
+
 
 
   checkUserIsGroupOwner() {
@@ -46,14 +42,12 @@ export default class CompletedChallengesList extends React.Component {
     return (
       <div>
         <h3>Completed Challenges</h3>
-        {this.renderUserPoints()}
         {this.state.completedChallengesList.map(challenge => {
           return (
             <div key={challenge.id}>
-              <input type='checkbox'  />
               <Link to={`/challenge/${challenge.id}`}>
-                {challenge.name}
-              </Link> - {challenge.description}
+                {challenge.name}  - {challenge.description}
+              </Link>
               <p>{challenge.points} Points</p>
               <p>Completed: {challenge.date_completed}</p>
             </div>

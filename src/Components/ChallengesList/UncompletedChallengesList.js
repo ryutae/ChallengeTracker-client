@@ -49,11 +49,10 @@ export default class UncompletedChallengesList extends React.Component {
         {this.state.uncompletedChallengesList.map(challenge => {
           return (
             <div key={challenge.id}>
-              <input type='checkbox'  />
               <Link to={`/challenge/${challenge.id}`}>
-                {challenge.name}
-              </Link> - {challenge.description}
-              <p>{challenge.points} Points</p>
+                <h4>{challenge.name}</h4>
+                <p>{challenge.description} - {challenge.points} Points</p>
+              </Link>
             </div>
             )
           })
