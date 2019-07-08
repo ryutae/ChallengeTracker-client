@@ -44,9 +44,9 @@ export default class CompletedChallengesList extends React.Component {
         <h3>Completed Challenges</h3>
         {this.state.completedChallengesList.map(challenge => {
           return (
-            <div key={challenge.id}>
-              <Link to={`/challenge/${challenge.id}`}>
-                {challenge.name}  - {challenge.description}
+            <div key={challenge.challenge_id}>
+              <Link to={`/challenge/${challenge.challenge_id}`}>
+                {challenge.challenge_name}  - {challenge.challenge_description}
               </Link>
               <p>{challenge.points} Points</p>
               <p>Completed: {challenge.date_completed}</p>
