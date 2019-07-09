@@ -10,5 +10,6 @@
 
 img {
   width: 45%;
+  max-width: 300px;
   margin-top: 1.5rem;
 }

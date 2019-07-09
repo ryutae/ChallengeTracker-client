@@ -73,7 +73,7 @@ export default class Register extends React.Component {
         <h1 className="title">Register</h1>
         <img src={loginImg} alt=""/>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='register-form'>
           <div role='alert'>
             {error && <p className='red'>{error}</p>}
           </div>
