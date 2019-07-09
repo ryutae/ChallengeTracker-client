@@ -25,3 +25,19 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+form {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+}
+
+form > input {
+  border: 1px solid #93a8f9;
+  box-shadow: 2px 1px 1px #888888;
+}
+
+form > input::selection {
+  box-shadow: 2px 1px 10px #888888;
+
+}

@@ -1,10 +1,11 @@
 .login-page {
-  max-width: 800px;
   margin: auto;
 }
 
 .login_form {
+  max-width: 600px;
   padding-top: 1rem;
+  margin: auto;
 }
 
 img {

@@ -24,6 +24,8 @@ input {
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
     width: 70%;
+    border: 1px solid #93a8f9;
+    box-shadow: 2px 1px 1px #888888;
 }
 
 .input-error {
@@ -31,7 +33,7 @@ input {
 }
 
 input:focus {
-    border: 2px solid var(--secondary-color);
+    box-shadow: 2px 1px 10px  var(--secondary-color);
 }
 
 button {
@@ -41,7 +43,7 @@ button {
     border: none;
     padding: 1rem 3rem;
     margin: 0.5rem !important;
-    font-size: 1.5rem !important;
+    font-size: 1.2rem !important;
 }
 
 .title {
@@ -57,11 +59,21 @@ button {
     font-size: small;
     width: 70%;
     margin: 0 auto;
+}
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+form {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
 }
 
 @media only screen and (max-width: 600px) {
     input {
-        width: 100%;
+        width: 90%;
     }
 }

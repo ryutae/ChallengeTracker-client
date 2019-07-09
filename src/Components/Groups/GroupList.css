@@ -1,17 +1,26 @@
 .create-group-button {
-  background: blue;
-  color: white;
+  color: #111111;
   padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
+  border: 1px solid #93a8f9;
+  border-radius: 10px;
+  box-shadow: 2px 1px 5px #888888;  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.create-group-button:hover {
+  background: dodgerblue;
+  color: white;
 }
 
 .GroupList {
-  padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+
 .GroupList div {
-  border: 1px solid black;
+  border: 1px solid #93a8f9;
+  border-radius: 10px;
+  box-shadow: 2px 1px 5px #888888;
   padding: 7px;
   margin: 5px 10px;
   cursor: pointer;
@@ -21,4 +30,8 @@
 .GroupList div span {
   font-weight: bold;
   color: black;
+}
+
+.GroupList div:hover {
+  box-shadow: 2px 1px 5px 10px dodgerblue;
 }

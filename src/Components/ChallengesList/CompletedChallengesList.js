@@ -31,9 +31,6 @@ export default class CompletedChallengesList extends React.Component {
     })
   }
 
-
-
-
   checkUserIsGroupOwner() {
     return (this.context.user.user_id === this.context.group.created_by)
   }
@@ -42,19 +39,21 @@ export default class CompletedChallengesList extends React.Component {
     return (
       <div className='completed-challenges'>
         <h3>Completed Challenges</h3>
-
+        {(this.state.completedChallengesList.length === 0) && <p>Haven't completed anything yet!</p>}
         {this.state.completedChallengesList.map(challenge => {
           return (
-            <div className='challenge-list-item' key={challenge.id}>
-              <Link to={`/challenge/${challenge.challenge_id}`}>
-                <span>{challenge.challenge_name}</span>{challenge.challenge_description}
-              </Link>
-              <p>{challenge.points} Points</p>
-            </div>
+            <Link to={`/challenge/${challenge.challenge_id}`}>
+              <div className='challenge-list-item' key={challenge.id}>
+                <div className='challenge-name'>
+                  <span>{challenge.challenge_name}</span>{challenge.challenge_description}
+                </div>
+                <p>{challenge.points} Points</p>
+              </div>
+            </Link>
             )
           })
         }
       </div>
-    );
+    )
   }
 }

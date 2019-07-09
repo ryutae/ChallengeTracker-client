@@ -4,4 +4,5 @@ footer {
   background: var(--font-color) !important;
   color: var(--light-color);
   flex-shrink: 0;
+  margin-top: 1.5rem;
 }

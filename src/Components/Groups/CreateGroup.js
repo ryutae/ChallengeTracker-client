@@ -29,10 +29,8 @@ export default class CreateGroup extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleCreateGroup}>
-        <label htmlFor='group_name'>Name</label>
-        <input name='group_name' id='group_name'/>
-        <label htmlFor='group_description'>Description</label>
-        <input description='group_description' id='group_description'/>
+        <input name='group_name' id='group_name' placeholder='Name of Group'/>
+        <input description='group_description' id='group_description' placeholder='Description'/>
         <button type='submit'>Create Group</button>
       </form>
     )

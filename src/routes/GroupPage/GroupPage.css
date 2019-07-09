@@ -2,6 +2,7 @@
   width: 90%;
   margin: auto;
   padding-bottom: 1.5rem;
+  max-width: 600px;
 }
 
 .challenge-list-item {
@@ -10,9 +11,16 @@
   grid-auto-rows: minmax(50px, auto);
   border: 1px solid #93a8f9;
   border-radius: 10px;
+  box-shadow: 2px 1px 5px #888888;
   justify-items: start;
   padding-left: 1rem;
   margin: .4rem auto;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.challenge-list-item:hover {
+  box-shadow: 2px 1px 5px 10px dodgerblue;
 }
 
 .challenge-list-item span {
@@ -21,7 +29,6 @@
   margin-right: 10px;
 }
 
-.challenge-list-item a {
-  vertical-align: middle;
+.challenge-name {
   margin: auto 0;
 }

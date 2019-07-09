@@ -16,10 +16,10 @@ export default class Home extends React.Component {
     // TODO: Admin menu
     return (
       <div>
+        <GroupsList />
         <Link to='/create-group' className='create-group-button'>
           Create Group
         </Link>
-        <GroupsList />
       </div>
       );
   }

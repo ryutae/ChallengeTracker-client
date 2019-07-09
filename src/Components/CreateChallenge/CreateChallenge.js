@@ -34,13 +34,10 @@ export default class CreateChallenge extends React.Component {
     const { group_id } = this.props.location.state
     // TODO: pass group_id to creating the challenge to save in backend
     return (
-      <form onSubmit={e => this.handleCreateChallenge(e, group_id)}>
-        <label htmlFor='challenge_name'>Name</label>
-        <input name='challenge_name' id='challenge_name'/>
-        <label htmlFor='challenge_description'>Description</label>
-        <input description='challenge_description' id='challenge_description'/>
-        <label htmlFor='challenge_points'>Points</label>
-        <input points='challenge_points' id='challenge_points'/>
+      <form onSubmit={e => this.handleCreateChallenge(e, group_id)} className='create-challenge-form'>
+        <input name='challenge_name' id='challenge_name' placeholder='Name' required/>
+        <input name='challenge_description' id='challenge_description' placeholder='Description' required/>
+        <input  name='challenge_points' id='challenge_points' type='number' placeholder='Points' required/>
         <button>Create Challenge</button>
       </form>
     )
