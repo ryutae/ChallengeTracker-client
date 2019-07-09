@@ -8,7 +8,8 @@ export default class Challenge extends React.Component {
     super(props)
     this.state = {
       challenge: {},
-      challengeComplete: null
+      challengeComplete: null,
+      date_completed: null
     }
   }
 
@@ -29,7 +30,8 @@ export default class Challenge extends React.Component {
     .then(([res1Json, res2Json]) => {
       this.setState({
         challenge: res1Json.data,
-        challengeComplete: res2Json.challengeComplete
+        challengeComplete: res2Json.challengeComplete,
+        date_completed: res2Json.date_completed
       })
     })
   }
@@ -119,13 +121,21 @@ export default class Challenge extends React.Component {
     return this.state.challengeComplete
   }
 
+  renderCompletedDate() {
+    return (
+      <p>
+      Completed on  {this.state.date_completed}
+      </p>
+    )
+  }
+
   render() {
     return (
       <div>
         <h4>Challenge: {this.state.challenge.name}</h4>
         <p>{this.state.challenge.description}</p>
         <p>{this.state.challenge.points} Points</p>
-        {!this.checkIfChallengeComplete() && this.renderCompleteChallengeButton()}
+        {this.checkIfChallengeComplete() ? this.renderCompletedDate() : this.renderCompleteChallengeButton()}
         <button onClick={() => this.props.history.goBack()}>
           Back
         </button>
