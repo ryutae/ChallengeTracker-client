@@ -131,6 +131,24 @@ export default class GroupPage extends React.Component {
     )
   }
 
+  renderCreateChallenge() {
+    const group_id = this.state.group.id
+    return (
+      <Link to={{
+        pathname: '/create-challenge',
+        state: {
+          group_id: group_id
+        }
+      }}>
+        Create Challenge
+      </Link>
+    )
+  }
+
+  checkUserIsGroupOwner() {
+    return (this.state.user.user_id === this.state.group.created_by)
+  }
+
   render() {
     const { group_id } = this.props.match.params
     const contextValue = {
@@ -152,6 +170,7 @@ export default class GroupPage extends React.Component {
           <Link to={`${group_id}/leaderboard`}>
             <p>Leaderboard</p>
           </Link>
+          {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
           {(!this.state.user.userInGroup) && <ChallengesList/>}
           {this.state.user.userInGroup  && <UncompletedChallengesList/>}
           {this.state.user.userInGroup && <CompletedChallengesList/>}

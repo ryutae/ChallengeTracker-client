@@ -79,24 +79,6 @@ export default class ChallengesList extends React.Component {
     )
   }
 
-  renderCreateChallenge() {
-    const group_id = this.context.group.id
-    return (
-      <Link to={{
-        pathname: '/create-challenge',
-        state: {
-          group_id: group_id
-        }
-      }}>
-        Create Challenge
-      </Link>
-    )
-  }
-
-  checkUserIsGroupOwner() {
-    return (this.context.user.user_id === this.context.group.created_by)
-  }
-
   render() {
     const { user } = this.context
     const { challengesInGroup } = this.context
@@ -104,7 +86,6 @@ export default class ChallengesList extends React.Component {
       <div>
         <h1>Challenge List</h1>
         {(user.userInGroup) && this.renderUserPoints()}
-        {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
         <div className='full-challenge-list'>
         {challengesInGroup.map(challenge => {
             return (<ChallengeListItem
