@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import config from '../config'
-import ChallengesList from '../Components/ChallengesList/ChallengesList'
-import CompletedChallengesList from '../Components/ChallengesList/CompletedChallengesList'
-import UncompletedChallengesList from '../Components/ChallengesList/UncompletedChallengesList'
-import TokenService from '../services/TokenService'
-import GroupPageContext from '../contexts/GroupPageContext'
+import config from '../../config'
+import ChallengesList from '../../Components/ChallengesList/ChallengesList'
+import CompletedChallengesList from '../../Components/ChallengesList/CompletedChallengesList'
+import UncompletedChallengesList from '../../Components/ChallengesList/UncompletedChallengesList'
+import TokenService from '../../services/TokenService'
+import GroupPageContext from '../../contexts/GroupPageContext'
+import './GroupPage.css'
 
 export default class GroupPage extends React.Component {
   constructor(props) {
@@ -126,17 +127,12 @@ export default class GroupPage extends React.Component {
 
   renderUserPoints() {
     return (
-      <h3>Current Points: {this.state.user.points}</h3>
+      <h3 className='current-points'>Current Points: {this.state.user.points}</h3>
     )
   }
 
   render() {
     const { group_id } = this.props.match.params
-    // TODO: Leaderboard
-    // TODO: Your Team
-    // TODO: Challenges
-    // TODO: Edit Group - admin
-    // TODO: Join Group
     const contextValue = {
       group: this.state.group,
       challengesInGroup: this.state.challengesInGroup,
@@ -150,26 +146,18 @@ export default class GroupPage extends React.Component {
           <div role='alert'>
             {this.state.error && <p className='red'>{this.state.error}</p>}
           </div>
-          <ul>
-            <li>
-              <Link to='/team'>
-                Team - to do
-              </Link>
-            </li>
-            <li>
-              <Link to={`${group_id}/leaderboard`}>
-                Leaderboard
-              </Link>
-            </li>
-          </ul>
           {(!this.state.user.userInGroup) && (!this.state.joinedGroup) && this.renderJoinGroupButton()}
-          {this.state.user.userInGroup && this.renderUserPoints()}
 
+          {this.state.user.userInGroup && this.renderUserPoints()}
+          <Link to={`${group_id}/leaderboard`}>
+            <p>Leaderboard</p>
+          </Link>
           {(!this.state.user.userInGroup) && <ChallengesList/>}
           {this.state.user.userInGroup  && <UncompletedChallengesList/>}
           {this.state.user.userInGroup && <CompletedChallengesList/>}
         </GroupPageContext.Provider>
       </div>
+
       );
   }
 }

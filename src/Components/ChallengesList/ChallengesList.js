@@ -105,6 +105,7 @@ export default class ChallengesList extends React.Component {
         <h1>Challenge List</h1>
         {(user.userInGroup) && this.renderUserPoints()}
         {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
+        <div className='full-challenge-list'>
         {challengesInGroup.map(challenge => {
             return (<ChallengeListItem
               key={challenge.id}
@@ -113,6 +114,7 @@ export default class ChallengesList extends React.Component {
           )
           })
         }
+        </div>
       </div>
     );
   }

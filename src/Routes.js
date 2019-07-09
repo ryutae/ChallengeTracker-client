@@ -8,16 +8,17 @@ import CreateChallenge from './Components/CreateChallenge/CreateChallenge'
 import CreateGroup from './Components/Groups/CreateGroup'
 import Home from './routes/Home/Home'
 import Team from './routes/Team/TeamPage'
-import GroupPage from './routes/GroupPage'
+import GroupPage from './routes/GroupPage/GroupPage'
 import NotFoundPage from './routes/NotFoundPage/NotFoundPage'
 import Leaderboard from './routes/Leaderboard/LeaderboardPage'
 import PrivateRoute from './Components/Utils/PrivateRoute'
 import PublicRoute from './Components/Utils/PublicRoute'
+import './Routes.css'
 
 export default class Routes extends React.Component {
   render() {
   return (
-      <div>
+      <div className='content'>
         <Switch>
           <Route exact path='/' component={LandingPage}/>
           <Route path='/home' component={Home}/>

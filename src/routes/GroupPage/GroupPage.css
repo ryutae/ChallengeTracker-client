@@ -1,0 +1,27 @@
+.completed-challenges, .uncompleted-challenges, .full-challenge-list {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 1.5rem;
+}
+
+.challenge-list-item {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-auto-rows: minmax(50px, auto);
+  border: 1px solid #93a8f9;
+  border-radius: 10px;
+  justify-items: start;
+  padding-left: 1rem;
+  margin: .4rem auto;
+}
+
+.challenge-list-item span {
+  font-weight: bold;
+  color: black;
+  margin-right: 10px;
+}
+
+.challenge-list-item a {
+  vertical-align: middle;
+  margin: auto 0;
+}

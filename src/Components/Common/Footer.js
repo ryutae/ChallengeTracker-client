@@ -5,7 +5,7 @@ export default class Footer extends React.Component {
   render() {
   return (
     <footer>
-      This is the footer
+      	&copy; Ryuta Eguchi 2019
     </footer>
   )
 }

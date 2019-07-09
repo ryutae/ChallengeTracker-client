@@ -1,0 +1,24 @@
+.create-group-button {
+  background: blue;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.GroupList {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.GroupList div {
+  border: 1px solid black;
+  padding: 7px;
+  margin: 5px 10px;
+  cursor: pointer;
+  color: #555;
+}
+
+.GroupList div span {
+  font-weight: bold;
+  color: black;
+}

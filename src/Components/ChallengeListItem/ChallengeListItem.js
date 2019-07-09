@@ -6,7 +6,7 @@ export default class ChallengeListItem extends Component {
     const { challenge } = this.props
     return (
       <Link to={`/challenge/${challenge.id}`}>
-        <div className='ChallengeListItem'
+        <div className='challenge-list-item'
         key={challenge.id}>
           <div className='ChallengeListItem_details'>
             <div className='ChallengeListItem_name'>

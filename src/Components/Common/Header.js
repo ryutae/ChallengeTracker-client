@@ -20,13 +20,13 @@ export default class Header extends React.Component {
 
   renderLogoutLink() {
     return (
-      <>
+      <li>
         <Link
           onClick={this.handleLogoutClick}
           to='/'>
           Logout
         </Link>
-      </>
+      </li>
     )
   }
 
@@ -42,7 +42,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <Link to='/home'>
+        <Link to='/home' className='Title'>
           <h1>Challenge Tracker</h1>
         </Link>
         <nav className='navbar'>
