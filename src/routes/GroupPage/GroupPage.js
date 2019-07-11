@@ -20,16 +20,6 @@ export default class GroupPage extends React.Component {
     }
   }
 
-  // renderJoinedGroup() {
-  //   console.log('renderJoinedGroup')
-  //   return (
-  //     <h3>Joined Group!</h3>
-  //   )
-  //   this.forceUpdate()
-  // }
-
-
-
   handleJoinGroup = e => {
     if (TokenService.hasAuthToken()) {
     e.preventDefault()
@@ -61,7 +51,7 @@ export default class GroupPage extends React.Component {
   }
   else {this.props.history.push('/login')}
   }
-  //put the state in the context
+
   componentDidMount() {
     this.setState({
       challengesInGroup: [],

@@ -12,6 +12,7 @@ export default class CompletedChallengesList extends React.Component {
     error: ''
   }
 
+// Gets completed challenges by the user
   componentDidMount() {
     const group_id = this.context.group.id
     this.setState({ error: ''})

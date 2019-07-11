@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import config from '../../config'
+import './LeaderboardPage.css'
 
 export default class LeaderboardPage extends React.Component {
   constructor(props) {
@@ -26,10 +26,16 @@ export default class LeaderboardPage extends React.Component {
     return (
       <div className='LeaderboardPage'>
         <h3>Leaderboard</h3>
+        <div className='leaderboard-list'>
         {this.state.users.map((user, i) => {
           return (
-            <div key={user.user_id}>
-              <p>{i+1}. {user.full_name}: {user.points} Points</p>
+            <div key={user.user_id} className='leaderboard-user-item'>
+              <div className ='leaderboard-user-name'>
+                <p>{i+1}. {user.full_name}</p>
+              </div>
+              <div className='leaderboard-user-points'>
+                <p>{user.points} Points</p>
+              </div>
             </div>
             )
           })
@@ -37,6 +43,7 @@ export default class LeaderboardPage extends React.Component {
         <button onClick={() => this.props.history.goBack()}>
           Back
         </button>
+      </div>
       </div>
       );
   }

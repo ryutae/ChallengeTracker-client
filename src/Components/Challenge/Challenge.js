@@ -13,6 +13,7 @@ export default class Challenge extends React.Component {
     }
   }
 
+// Fetches challenge info and checks if challenge is completed by user
   componentDidMount() {
     const { challenge_id } = this.props.match.params
     Promise.all([

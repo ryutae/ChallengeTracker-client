@@ -1,0 +1,23 @@
+.LeaderboardPage {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.leaderboard-user-item {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-auto-rows: minmax(50px, auto);
+  border: 1px solid #93a8f9;
+  border-radius: 10px;
+  box-shadow: 2px 1px 5px #888888;
+  justify-items: start;
+  padding-left: 1rem;
+  margin: .4rem auto;
+  transition: 0.3s;
+}
+
+.leaderboard-user-item:hover {
+  box-shadow: 2px 1px 5px 10px dodgerblue;
+}

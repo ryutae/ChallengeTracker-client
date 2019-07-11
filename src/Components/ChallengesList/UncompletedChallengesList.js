@@ -12,6 +12,7 @@ export default class UncompletedChallengesList extends React.Component {
     error: ''
   }
 
+// Fetches uncompleted challenges by user
   componentDidMount() {
     const group_id = this.context.group.id
     this.setState({ error: ''})

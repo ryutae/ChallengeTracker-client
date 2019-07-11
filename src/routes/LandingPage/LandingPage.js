@@ -26,7 +26,9 @@ export default class LandingPage extends React.Component {
         <Link to='/home'>
           <h3>Join or create a group</h3>
         </Link>
-        <h3>Track your challenges!</h3>
+        <div>
+          <h3>Track your challenges!</h3>
+        </div>
         <h4>Compare your progress against others</h4>
       </div>
       );
