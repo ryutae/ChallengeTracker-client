@@ -45,7 +45,7 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { error } = this.state
+    const { error } = this.context
     return (
       <div className="login-page">
         <h1 className="title">Login</h1>
