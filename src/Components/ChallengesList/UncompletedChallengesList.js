@@ -16,7 +16,7 @@ export default class UncompletedChallengesList extends React.Component {
   componentDidMount() {
     const group_id = this.context.group.id
     this.setState({ error: ''})
-    fetch(`${config.API_ENDPOINT}/challenge/group/${group_id}/uncompleted`, {
+    fetch(`${config.API_ENDPOINT}/challenges/group/${group_id}/uncompleted`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }

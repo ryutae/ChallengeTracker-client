@@ -63,9 +63,9 @@ export default class GroupPage extends React.Component {
     const { group_id } = this.props.match.params
     this.setState({ error: null })
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/challenge/group/${group_id}`),
+      fetch(`${config.API_ENDPOINT}/challenges/group/${group_id}`),
       fetch(`${config.API_ENDPOINT}/groups/${group_id}`),
-      fetch(`${config.API_ENDPOINT}/user/group/${group_id}`, {
+      fetch(`${config.API_ENDPOINT}/users/group/${group_id}`, {
         headers: {
           'authorization': `bearer ${TokenService.getAuthToken()}`,
         }
@@ -75,7 +75,6 @@ export default class GroupPage extends React.Component {
       return Promise.all([res1.json(), res2.json(), res3.json()])
     })
     .then(([res1Json, res2Json, res3Json]) => {
-      console.log(res1Json, res2Json, res3Json)
       this.setState({
         challengesInGroup: res1Json,
         group: res2Json,
@@ -86,8 +85,7 @@ export default class GroupPage extends React.Component {
   }
 
   updatePoints = () => {
-    console.log('updatePoints started')
-    fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
+    fetch(`${config.API_ENDPOINT}/users/updatepoints`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',

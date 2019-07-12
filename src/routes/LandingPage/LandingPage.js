@@ -9,8 +9,6 @@ export default class LandingPage extends React.Component {
   }
 
   render() {
-    // TODO: Edit Profile info
-    // TODO: Admin menu
     return (
       <div>
         <h1>Welcome to Challenge Tracker</h1>

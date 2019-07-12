@@ -6,9 +6,8 @@ import TokenService from '../../services/TokenService'
 export default class CreateChallenge extends React.Component {
   handleCreateChallenge(e, group_id) {
     e.preventDefault()
-    //todo: fix binding of this
     const that = this
-    fetch(`${config.API_ENDPOINT}/challenge/create`, {
+    fetch(`${config.API_ENDPOINT}/challenges/create`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -23,16 +22,12 @@ export default class CreateChallenge extends React.Component {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
-      // that.props.history.push('/')
       that.props.history.goBack()
     })
-    console.log('creating challenge')
-
   }
+
   render() {
     const { group_id } = this.props.location.state
-    // TODO: pass group_id to creating the challenge to save in backend
     return (
       <form onSubmit={e => this.handleCreateChallenge(e, group_id)} className='create-challenge-form'>
         <input name='challenge_name' id='challenge_name' placeholder='Name' required/>

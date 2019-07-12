@@ -12,8 +12,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    // TODO: Edit Profile info
-    // TODO: Admin menu
     return (
       <div>
         <GroupsList />

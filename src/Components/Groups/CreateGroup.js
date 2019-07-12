@@ -20,12 +20,10 @@ export default class CreateGroup extends React.Component {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       this.props.history.goBack()
     })
-    console.log('creating group')
-
   }
+  
   render() {
     return (
       <form onSubmit={this.handleCreateGroup}>

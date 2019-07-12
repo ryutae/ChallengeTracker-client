@@ -14,15 +14,12 @@ export default class LeaderboardPage extends React.Component {
     fetch(`${config.API_ENDPOINT}/groups/${group_id["group_id"]}/allusers`)
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       this.setState({
         users: resJson.data
       })
     })
   }
   render() {
-    // TODO: Get all teams and Points
-    // TODO: order teams by points
     return (
       <div className='LeaderboardPage'>
         <h3>Leaderboard</h3>

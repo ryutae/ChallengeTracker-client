@@ -17,8 +17,8 @@ export default class Challenge extends React.Component {
   componentDidMount() {
     const { challenge_id } = this.props.match.params
     Promise.all([
-    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`),
-    fetch(`${config.API_ENDPOINT}/challenge/complete/${challenge_id}`, {
+    fetch(`${config.API_ENDPOINT}/challenges/${challenge_id}`),
+    fetch(`${config.API_ENDPOINT}/challenges/complete/${challenge_id}`, {
       method: 'GET',
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -41,21 +41,18 @@ export default class Challenge extends React.Component {
     //if not admin user, function will not work
     // TODO: fix the that = this
     let that = this
-    console.log('handleDelete initiated')
     const { challenge_id } = this.props.match.params
-    fetch(`${config.API_ENDPOINT}/challenge/${challenge_id}`, {
+    fetch(`${config.API_ENDPOINT}/challenges/${challenge_id}`, {
       method: 'DELETE',
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log(resJson)
       that.props.history.goBack()
     })
   }
 
   updatePoints = () => {
-    console.log('updatePoints started')
-    fetch(`${config.API_ENDPOINT}/user/updatepoints`, {
+    fetch(`${config.API_ENDPOINT}/users/updatepoints`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -68,10 +65,8 @@ export default class Challenge extends React.Component {
   }
 
   handleCompleteChallenge = () => {
-    // TODO: COMPLETE CHALLENGE BUTTON
-    console.log(`completed the challenge`)
     const { challenge_id } = this.props.match.params
-    fetch(`${config.API_ENDPOINT}/challenge/complete/${challenge_id}`, {
+    fetch(`${config.API_ENDPOINT}/challenges/complete/${challenge_id}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -83,9 +78,6 @@ export default class Challenge extends React.Component {
       })
     })
     .then(res => res.json())
-    .then(resJson => {
-      console.log(resJson)
-    })
     .then(this.updatePoints)
     .then(this.props.history.goBack())
     .catch()
