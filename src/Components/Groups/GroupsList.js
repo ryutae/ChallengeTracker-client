@@ -26,7 +26,7 @@ export default class GroupsList extends React.Component {
   renderGroups() {
     const { groupList = [] } = this.context
     return groupList.map(group =>
-      <Link to={`/groups/${group.id}`}>
+      <Link to={`/groups/${group.id}`} key={group.id}>
         <div key={group.id} className='group-list-item'>
           <span>{group.name}</span> - {group.description}
         </div>
