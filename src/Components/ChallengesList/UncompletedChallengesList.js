@@ -49,7 +49,7 @@ export default class UncompletedChallengesList extends React.Component {
         <h3>Incomplete Challenges</h3>
         {this.state.uncompletedChallengesList.map(challenge => {
           return (
-            <Link to={`/challenge/${challenge.id}`}>
+            <Link to={`/challenge/${challenge.id}`} key={challenge.id}>
               <div className='challenge-list-item' key={challenge.id}>
                 <div className='challenge-name'>
                   <span>{challenge.name}</span>{challenge.description}

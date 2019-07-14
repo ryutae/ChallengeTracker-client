@@ -43,7 +43,7 @@ export default class CompletedChallengesList extends React.Component {
         {(this.state.completedChallengesList.length === 0) && <p>Haven't completed anything yet!</p>}
         {this.state.completedChallengesList.map(challenge => {
           return (
-            <Link to={`/challenge/${challenge.challenge_id}`}>
+            <Link to={`/challenge/${challenge.challenge_id}`} key={challenge.id}>
               <div className='challenge-list-item' key={challenge.id}>
                 <div className='challenge-name'>
                   <span>{challenge.challenge_name}</span>{challenge.challenge_description}
