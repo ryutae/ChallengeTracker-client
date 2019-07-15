@@ -13,8 +13,10 @@ The Challenge Tracker Client is an React application
 ## Screenshots
 #### Challenge List
 <img src="/public/Complete_Incomplete_list.png" width="500" alt="challenge-list">
+
 #### Leaderboard
 <img src="/public/Leaderboard.png" width="500" alt="leaderboard">
+
 #### Create new challenge
 <img src="/public/Create_challenge.png" width="500" alt="create-new">
 
