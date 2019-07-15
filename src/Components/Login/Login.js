@@ -44,6 +44,36 @@ export default class Login extends React.Component {
       })
   }
 
+  demoUserLogin = () => {
+    fetch(`${config.API_ENDPOINT}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_name: 'demo',
+        password: 'P@ssw0rd',
+      })
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken)
+        return res
+      })
+      .then(res => {
+        this.context.setUserLoggedInTrue()
+        this.props.history.push('/home')
+      })
+      .catch(res => {
+        this.context.setError(res.error)
+      })  }
+
+
+
   render() {
     const { error } = this.context
     return (
@@ -62,6 +92,9 @@ export default class Login extends React.Component {
           </div>
           <button type='submit'>
             Login
+          </button>
+          <button onClick={this.demoUserLogin}>
+            Demo User
           </button>
         </form>
       </div>
