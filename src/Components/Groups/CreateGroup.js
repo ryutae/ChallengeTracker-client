@@ -14,8 +14,8 @@ export default class CreateGroup extends React.Component {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        name: e.target.group_name.value,
-        description: e.target.group_description.value,
+        name: e.target.group_name.value.trim(),
+        description: e.target.group_description.value.trim(),
       })
     })
     .then(res => res.json())
