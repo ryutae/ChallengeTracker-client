@@ -16,7 +16,6 @@ export class GroupListProvider extends Component {
   };
 
   setGroupList = groupList => {
-    console.log(groupList)
     this.setState({ groupList })
   }
 
