@@ -43,7 +43,7 @@ export default class Header extends React.Component {
     return (
       <header>
         <Link to='/home' className='Title'>
-          <h1>Challenge Tracker</h1>
+          <p className='header_title'>Challenge Tracker</p>
         </Link>
         <nav className='navbar'>
           <ul>
