@@ -2,6 +2,8 @@ import React from 'react'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
 import GroupPageContext from '../../contexts/GroupPageContext'
+import './Challenge.css'
+
 export default class Challenge extends React.Component {
   static contextType = GroupPageContext
   constructor(props) {
@@ -124,7 +126,7 @@ export default class Challenge extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='challenge_page'>
         <h4>Challenge: {this.state.challenge.name}</h4>
         <p>{this.state.challenge.description}</p>
         <p>{this.state.challenge.points} Points</p>

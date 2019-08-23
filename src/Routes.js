@@ -13,12 +13,10 @@ import NotFoundPage from './routes/NotFoundPage/NotFoundPage'
 import Leaderboard from './routes/Leaderboard/LeaderboardPage'
 import PrivateRoute from './Components/Utils/PrivateRoute'
 import PublicRoute from './Components/Utils/PublicRoute'
-import './Routes.css'
 
 export default class Routes extends React.Component {
   render() {
   return (
-      <div className='content'>
         <Switch>
           <Route exact path='/' component={LandingPage}/>
           <Route path='/home' component={Home}/>
@@ -32,7 +30,6 @@ export default class Routes extends React.Component {
           <PrivateRoute path='/groups/:group_id/leaderboard'  component={Leaderboard}/>
           <Route component={NotFoundPage}/>
         </Switch>
-      </div>
     );
   }
 }

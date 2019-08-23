@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import GroupsList from '../../Components/Groups/GroupsList'
 import '../../Components/Groups/GroupList.css'
+import './HomePage.css'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='home_page'>
         <GroupsList />
         <Link to='/create-group' className='create-group-button'>
           Create Group

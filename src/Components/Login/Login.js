@@ -77,10 +77,10 @@ export default class Login extends React.Component {
   render() {
     const { error } = this.context
     return (
-      <div className="login-page">
+      <div className="register-page">
         <h1 className="title">Login</h1>
           <img src={loginImg} alt=""/>
-        <form className='login_form' onSubmit={this.handleLogin}>
+        <form className='register-form' onSubmit={this.handleLogin}>
           <div role='alert'>
             {error && <p className='red'>{error}</p>}
           </div>
