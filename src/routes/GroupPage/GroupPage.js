@@ -7,6 +7,7 @@ import UncompletedChallengesList from '../../Components/ChallengesList/Uncomplet
 import TokenService from '../../services/TokenService'
 import GroupPageContext from '../../contexts/GroupPageContext'
 import './GroupPage.css'
+import LinkButton from '../LandingPage/LinkButton'
 
 export default class GroupPage extends React.Component {
   constructor(props) {
@@ -128,7 +129,7 @@ export default class GroupPage extends React.Component {
           group_id: group_id
         }
       }}>
-        Create Challenge
+        <p className='create_challenge_link'>Create Challenge</p>
       </Link>
     )
   }
@@ -155,9 +156,9 @@ export default class GroupPage extends React.Component {
           {(!this.state.user.userInGroup) && (!this.state.joinedGroup) && this.renderJoinGroupButton()}
 
           {this.state.user.userInGroup && this.renderUserPoints()}
-          <Link to={`${group_id}/leaderboard`}>
-            <p>Leaderboard</p>
-          </Link>
+          <LinkButton to={`${group_id}/leaderboard`}>
+            Leaderboard
+          </LinkButton>
           {this.checkUserIsGroupOwner() && this.renderCreateChallenge()}
           {(!this.state.user.userInGroup) && <ChallengesList/>}
           {this.state.user.userInGroup  && <UncompletedChallengesList/>}
