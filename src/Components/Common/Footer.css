@@ -1,10 +1,12 @@
 footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
   padding: 0.75rem;
   background: var(--font-color) !important;
   color: var(--light-color);
   flex-shrink: 0;
-  margin-top: 1.5rem;
+  height: 42px;
 }
 
 footer a {

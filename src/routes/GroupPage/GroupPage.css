@@ -1,3 +1,7 @@
+.GroupPage {
+  height: 100%;
+}
+
 .completed-challenges, .uncompleted-challenges, .full-challenge-list {
   width: 90%;
   margin: auto;
@@ -31,4 +35,14 @@
 
 .challenge-name {
   margin: auto 0;
+}
+
+.create_challenge_link {
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+
+.create_challenge_link:hover {
+  font-weight: 800;
+  color: blue;
 }
