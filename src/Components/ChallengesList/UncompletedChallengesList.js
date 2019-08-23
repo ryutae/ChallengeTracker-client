@@ -47,6 +47,7 @@ export default class UncompletedChallengesList extends React.Component {
     return (
       <div className='uncompleted-challenges'>
         <h3>Incomplete Challenges</h3>
+        {(this.state.uncompletedChallengesList.length === 0) && <p>No challenges left!</p>}
         {this.state.uncompletedChallengesList.map(challenge => {
           return (
             <Link to={`/challenge/${challenge.id}`} key={challenge.id}>

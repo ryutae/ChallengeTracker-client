@@ -20,6 +20,7 @@ export default class ChallengesList extends React.Component {
         <h1>Challenge List</h1>
         {(user.userInGroup) && this.renderUserPoints()}
         <div className='full-challenge-list'>
+        {(challengesInGroup === []) && <p>There aren't any challenges!</p>}
         {challengesInGroup.map(challenge => {
             return (<ChallengeListItem
               key={challenge.id}
