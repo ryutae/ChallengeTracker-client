@@ -1,0 +1,30 @@
+.landing_page {
+    background-image: url('../../Assets/huddle.jpg');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; 
+    background-color: rgb(175, 172, 172, 0.2) !important;
+    height: 100vh;
+    color: #e4e4e4;
+    text-shadow: -1px 0 #292929, 0 1px #292929, 1px 0 #292929, 0 -1px #292929;
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.landing_page a:link{
+    color: #e4e4e4;
+    text-shadow: -1px 0 #4c06f0, 0 1px #292929, 1px 0 #292929, 0 -1px #292929;
+}
+
+.landing_page a:visited{
+    color: #e4e4e4;
+    text-shadow: -1px 0 #292929, 0 1px #292929, 1px 0 #292929, 0 -1px #292929;
+}
+
+.landing_page_text {
+    margin: auto;
+}
+
+.landing_page_links {
+    margin: auto;
+}

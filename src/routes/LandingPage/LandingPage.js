@@ -1,5 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import './LandingPage.css'
+import LinkButton from './LinkButton'
+
 export default class LandingPage extends React.Component {
   constructor(props) {
     super(props)
@@ -10,24 +12,15 @@ export default class LandingPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to Challenge Tracker</h1>
-        <h3>A Simple, competitive way to fight your laziness!</h3>
-        <h3>
-          <Link to='/register'>
-            Register a user
-          </Link> and
-          <Link to='/login'>
-             <span> login</span>
-          </Link>
-        </h3>
-        <Link to='/home'>
-          <h3>Join or create a group</h3>
-        </Link>
-        <div>
-          <h3>Track your challenges!</h3>
+      <div className='landing_page'>
+        <div className='landing_page_text'>
+          <h1>Welcome to Challenge Tracker</h1>
+          <h3>Conquering challenges together and pushing each other on</h3>
+          <div className='landing_page_links'>
+            <LinkButton to='/register'>Register</LinkButton>
+            <LinkButton to='/login'>Login</LinkButton>
+          </div>
         </div>
-        <h4>Compare your progress against others</h4>
       </div>
       );
   }
