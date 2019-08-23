@@ -44,6 +44,12 @@ button {
     padding: 1rem 3rem;
     margin: 0.5rem !important;
     font-size: 1.2rem !important;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: var(--secondary-color);
+    cursor: pointer;
 }
 
 .title {
