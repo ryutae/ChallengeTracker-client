@@ -1,5 +1,6 @@
 # Challenge Tracker API
 [Live App](https://ryutae-challenge-tracker-app.now.sh)
+
 [API Repo](https://github.com/ryutae/ChallengeTracker-API)
 ## Summary
 
